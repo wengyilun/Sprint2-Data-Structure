@@ -1,3 +1,29 @@
+import sys
+sys.path.append('../queue')
+from queue import Queue
+
+
+# class Queue:
+#     def __init__(self):
+#         self.size = 0
+#         self.storage = DoublyLinkedList()
+#
+#     def __len__(self):
+#         return self.size
+#
+#     def enqueue(self, value):
+#         self.size += 1
+#         self.storage.add_to_tail(value)
+#
+#     def dequeue(self):
+#         if self.size == 0:
+#             return
+#         self.size -= 1
+#         return self.storage.remove_from_head()
+#
+#     def __str__(self):
+#         return str(self.storage)
+
 """
 Binary search trees are a data structure that enforce an ordering over 
 the data they store. That ordering in turn makes it a lot more efficient 
@@ -9,6 +35,11 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+
+# sys.path.append('../stack')
+# from stack import Stack
+
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -83,12 +114,10 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        if node is None:
-            return
-
-        self.in_order_print(node.left)
-        print(node.value)
-        self.in_order_print(node.right)
+        if node is not None:
+            self.in_order_print(node.left)
+            print(node.value)
+            self.in_order_print(node.right)
 
 
     # Print the value of every node, starting with the given node,
@@ -102,6 +131,16 @@ class BSTNode:
             print(popped.value)
             queue.append(popped.left)
             queue.append(popped.right)
+    # def bft_print(self, node):
+    #     q = Queue()
+    #     q.enqueue(node)
+    #     while len(q) > 0:
+    #         popped = q.dequeue()
+    #         if popped is None:
+    #             continue
+    #         print(popped.value)
+    #         q.enqueue(popped.left)
+    #         q.enqueue(popped.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
@@ -120,10 +159,28 @@ class BSTNode:
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self, node):
-        pass
+        if node is not None:
+            print(node.value)
+            self.pre_order_dft(node.left)
+            self.pre_order_dft(node.right)
 
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
-        pass
+        if node is not None:
+            self.post_order_dft(node.left)
+            self.post_order_dft(node.right)
+            print(node.value)
 
+
+bst = BSTNode(1)
+bst.insert(8)
+bst.insert(5)
+bst.insert(7)
+bst.insert(6)
+bst.insert(3)
+bst.insert(4)
+bst.insert(2)
+# print(bst)
+# bst.in_order_print(bst)
+bst.pre_order_dft(bst)
 
